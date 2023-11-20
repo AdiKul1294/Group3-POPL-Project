@@ -33,9 +33,9 @@ struct User {
 }
 
 #[derive(Debug, Serialize, Deserialize, FromForm)]
-struct Note {
-    title: String,
-    content: String,
+struct Note<'a> {
+    title: &'a str,
+    content: &'a str,
 }
 
 #[get("/welcome")]
@@ -92,7 +92,7 @@ struct MyData {
 // }
 
 #[post("/note", data = "<data>")]
-async fn post_data(data: Form<Note>) -> Status {
+async fn post_data<'a>(data: Form<Note<'a>>) -> Status {
     let title = &data.title;
     let note = &data.content;
 
