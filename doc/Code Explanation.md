@@ -22,6 +22,7 @@ router.get("/login", (req, res) => {
 Now we show four CRUD(Create, Read, Update, Delete) operations below, using API calls. Our databse MongoDB stores all these Notes, and server acts as the communication channel between end-user and database.
 
 1. Creating a new note
+   We create a new instance of note using the NoteModel object and return code 201 if the code is created successfully. 
 ```
 router.post("/note", (req, res) => {
     if(!req.body) {
@@ -43,6 +44,7 @@ router.post("/note", (req, res) => {
 ```
 
 2. Read Notes
+   We use findOne function to read note and display error code 500 in case of error.
 ```
 router.get("/note", (req, res) => {
     if(!req.query.title) {
@@ -104,7 +106,7 @@ router.delete("/note", (req, res) => {
 });
 ```
 
-Now we focus on Rust. 
+Now we focus on Rust. For rust we use Rocket microservice architecture. Hence all below functions are defined in Rocket.
 
 
 We first connect server with MongoDB to maintain channel of communication for note CRUD operation.
@@ -117,6 +119,7 @@ We first connect server with MongoDB to maintain channel of communication for no
 **Rust also uses fewer line of code, as we show below for all CRUD operations.**
 
 1. Creating Notes
+   Using collection defined above, we use insert_one fucntion to create a new note.
 ```
 let document = doc! {
         "title": title,
@@ -126,6 +129,7 @@ let document = doc! {
 
 ```
 2. Read Notes
+   We use find_one function to read node.
 ```
  let doc = collection.find_one(filter.clone(), None).await.unwrap();
     let note = Note {
@@ -134,6 +138,7 @@ let document = doc! {
     };
 ```
 3. Update Notes
+   We use update_one function to update the note, as per title given by user.
 ```
 let filter = doc! {
         "title": old_title,
@@ -142,9 +147,10 @@ let document = doc! {
         "title": title,
         "content": note,
     };
-let _ = collection.delete_one(filter, document, None).await.expect("Failed to update document from MongoDB");
+let _ = collection.update_one(filter, document, None).await.expect("Failed to update document from MongoDB");
 ```
 4. Delete Notes
+    We use delete_one function to delete the note, as per the title given by user.
 ```
 let filter = doc! {
         "title": title_to_delete,
