@@ -1,5 +1,7 @@
 ## Code Explanation
 
+![flowchart](https://github.com/AdiKul1294/Group3-POPL-Project/assets/101890168/755f1fd0-35d2-43eb-b7d7-08e94609ef70)
+
 In this project, we are showing performance difference between JavaScript and Rust on factors Memory utilisation, CPU Utilisation, Time taken per request, Network Traffic, and other factors which form the bedrock of any principles of programming language. Below we show some snippets of code, for both languages and show how we implemented this in both langauges.
 **JavaScript is a high level and dynamically typed language, which means that variables are determined at the runtime. We don't need to specify type explicitly.**
 
