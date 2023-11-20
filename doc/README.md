@@ -118,6 +118,13 @@ Throughput test involved calling the microservice by multiple clients and seeing
 
 ## Results
 
+### Tests Conducted
+
+- Wrote a Python script to test the backends developed.
+- We conducted throughput tests and memory load stress tests.
+- Memory load tests include heavy load testing and high memory utilisation.
+- Throughput test involved calling the microservice by multiple clients and seeing how it reacts to increasing numbers of clients and how it scales accordingly.
+
 *For load testing-JavaScript*
 ![load_js_memory](https://github.com/AdiKul1294/Group3-POPL-Project/assets/101890168/3340aaa5-3826-4829-aaee-7a1603fbee2e)
 *For load testing-Rust*
