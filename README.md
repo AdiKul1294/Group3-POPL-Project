@@ -109,6 +109,10 @@ The code is organized into modules, as indicated by the `mod` keyword. For examp
 Various methods for string handling are demonstrated, such as using the `String` type, the `to_string()` method, and string literals.
 
 These principles and features highlight Rust's focus on memory safety, ownership, and zero-cost abstractions, making it suitable for systems programming and web development.
+
+##Tests Conducted
+Wrote a Python script to test the backends developed. We conducted throughput tests and memory load stress tests. Memory load tests include heavy load testing and high memory utilisation.
+Throughput test involved calling the microservice by multiple clients and seeing how it reacts to increasing numbers of clients and how it scales accordingly.
 ## Results
 
 *For load testing-JavaScript*
