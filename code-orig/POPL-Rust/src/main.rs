@@ -12,7 +12,7 @@ use mongodb::{bson::doc, options::FindOptions, Client, Collection};
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, welcome, post_data, retrieve_file])
+    rocket::build().mount("/", routes![index, mem_load, post_data, retrieve_file])
 }
 
 // Your MongoDB database configuration
@@ -38,8 +38,8 @@ struct Note<'a> {
     content: &'a str,
 }
 
-#[get("/welcome")]
-async fn welcome() -> String {
+#[get("/mem_load")]
+async fn mem_load() -> String {
     // Connect to the MongoDB database
     let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
     let db = client.database(DATABASE_NAME);
