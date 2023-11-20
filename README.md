@@ -24,7 +24,7 @@ Furthermore, our server is self-hosted, and its accessibility is facilitated thr
 ## POPL Aspects
 This Rust program is a web application that integrates with MongoDB. It uses the Rocket web framework for routing and asynchronous programming. Below are explanations of key principles and features used in this Rust code:
 
-## 1. Ownership and Borrowing
+### 1. Ownership and Borrowing
 
 Rust's ownership system ensures memory safety by enforcing rules at compile time. References and borrowing are used in function parameters as shown below:
 ```
@@ -41,7 +41,7 @@ async fn update_document(old_title: &str, data: Form<Note>) -> Status {
 }
 ```
 
-## 2. Traits
+### 2. Traits
 
 The `Serialize` and `Deserialize` traits from the `serde` crate are implemented for the `User` and `Note` structs. These traits enable conversion between Rust data structures and data interchange formats. 
 ```
@@ -59,7 +59,7 @@ struct Note {
 }
 ```
 
-## 3. Lifetime Specifiers
+### 3. Lifetime Specifiers
 
 Lifetimes are specified in function signatures, such as `async fn post_data(data: Form<Note>) -> Status`, implicitly managing the lifetime of the `Form<Note>` data.
 ```
@@ -76,35 +76,35 @@ async fn post_data<'a>(data: Form<Note<'a>>) -> Status {
 
 ```
 
-## 4. Structs
+### 4. Structs
 
 Rust's struct and enum types define structured data. For example, `User`, `Note`, and `MyData` are defined as structs.
 
-## 5. Concurrency and Async/Await
+### 5. Concurrency and Async/Await
 
 The `tokio` crate is employed for asynchronous programming. The `async` keyword and `await` expressions are used in functions like `welcome()` and asynchronous routes (e.g., `post_data`).
 
-## 6. Functional Programming
+### 6. Functional Programming
 
 Functional programming concepts are used in data processing. Functions like `map`, `unwrap`, and closures are used in combination with iterators.
 
-## 7. Error Handling
+### 7. Error Handling
 
 The `expect` method is used for error handling, providing a custom error message if the code fails. The `unwrap` method is used to extract values from `Result` or `Option`, panicking if an error occurs.
 
-## 8. External Dependencies
+### 8. External Dependencies
 
 External dependencies like `rocket`, `mongodb`, `serde`, and `tokio` showcase Rust's ability to integrate seamlessly with external libraries.
 
-## 9. Pattern Matching
+### 9. Pattern Matching
 
 The `match` keyword is used for pattern matching, as seen in `match` blocks in functions like `get_note()`.
 
-## 10. Module System
+### 10. Module System
 
 The code is organized into modules, as indicated by the `mod` keyword. For example, MongoDB-related code is encapsulated within its module.
 
-## 11. String Handling
+### 11. String Handling
 
 Various methods for string handling are demonstrated, such as using the `String` type, the `to_string()` method, and string literals.
 
