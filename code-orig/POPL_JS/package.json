@@ -1,0 +1,25 @@
+{
+  "name": "popl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env PORT=5000 NEW_RELIC_APP_NAME=popl_js NEW_RELIC_LICENSE_KEY=f6b76ca01ff184c0d9fff4c6714bdb96FFFFNRAL node -r newrelic index.js",
+    "start-watch": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "newrelic": "^11.5.0",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "description": ""
+}
