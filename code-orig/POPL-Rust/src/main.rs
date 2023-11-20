@@ -10,19 +10,9 @@ use serde_json::json;
 use std::path::Path;
 use mongodb::{bson::doc, options::FindOptions, Client, Collection};
 
-use rocket::Build;
-use rocket::figment::Figment;
-use rocket::Config;
-
 #[launch]
-fn rocket() -> rocket::Rocket<Build> {
-    let config = Figment::from(Config::default())
-        .merge(("profile", "Dev"))
-        .merge(("address", "0.0.0.0"))
-        .merge(("port", 8000));
-
-    rocket::custom(config)
-        .mount("/", routes![index, welcome, get_note, post_data, retrieve_file, ])
+fn rocket() -> _ {
+    rocket::build().mount("/", routes![index, welcome, post_data, retrieve_file])
 }
 
 // Your MongoDB database configuration
@@ -48,12 +38,8 @@ struct Note {
     content: String,
 }
 
-use std::time::{Duration, SystemTime};
-
 #[get("/welcome")]
 async fn welcome() -> String {
-
-    let start = SystemTime::now();
     // Connect to the MongoDB database
     let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
     let db = client.database(DATABASE_NAME);
@@ -66,7 +52,6 @@ async fn welcome() -> String {
             title: "title".to_string(),
             content: "content".to_string(),
         };
-        Box::new(note);
     }
 
     // Create a new document and insert it into the MongoDB collection
@@ -79,18 +64,94 @@ async fn welcome() -> String {
         "title": note.title,
         "content": note.content,
     });
-    let end = SystemTime::now();
-    let duration = end.duration_since(start).unwrap();
-    println!("Time elapsed: {:?}", duration);
-    
     response_data.to_string()
 }
-
 
 #[derive(Debug, Deserialize, FromForm)]
 struct MyData {
     str1: String,
     str2: String,
+}
+
+// #[post("/login", data = "<data>")]
+// fn login(data: Form<MyData>) -> Status {
+//     let _response_data = json!({
+//         "str1": data.str1,
+//         "str2": data.str2,
+//     });
+//     Status::Ok
+// }
+
+// #[post("/sign_up", data = "<data>")]
+// fn sign_up(data: Form<MyData>) -> Status {
+//     let _response_data = json!({
+//         "str1": data.str1,
+//         "str2": data.str2,
+//     });
+//     Status::Ok
+// }
+
+#[post("/note", data = "<data>")]
+async fn post_data(data: Form<Note>) -> Status {
+    let title = &data.title;
+    let note = &data.content;
+
+    // Connect to the MongoDB database
+    let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
+    let db = client.database(DATABASE_NAME);
+    let collection = db.collection(COLLECTION_NAME);
+
+    // Create a new document and insert it into the MongoDB collection
+    let document = doc! {
+        "title": title,
+        "content": note,
+    };
+    let _ = collection.insert_one(document, None).await.expect("Failed to insert document into MongoDB");
+
+    Status::Ok
+}
+
+#[delete("/note")]
+async fn delete_document() -> Status {
+    // Connect to the MongoDB database
+    let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
+    let db = client.database(DATABASE_NAME);
+    let collection = db.collection(COLLECTION_NAME);
+    
+    // Specify the filter criteria to identify the document to be deleted
+    let filter = doc! {
+        "title": title_to_delete,
+    };
+
+    // Perform the delete operation
+    let _ = collection.delete_one(filter, None).await.expect("Failed to delete document from MongoDB");
+    Status::Ok
+}
+
+#[put("/note?title=<old_title>"), data = "<data>")]
+async fn update_document(old_title: &str, data: Form<Note>) -> Status {
+    let title = &data.title;
+    let note = &data.content;
+
+    // Connect to the MongoDB database
+    let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
+    let db = client.database(DATABASE_NAME);
+    let collection = db.collection(COLLECTION_NAME);
+    
+    // Specify the filter criteria to identify the document to be updated
+    let filter = doc! {
+        "title": old_title,
+    };
+
+    // Create updated document and insert it into the MongoDB collection
+    let document = doc! {
+        "title": title,
+        "content": note,
+    };
+
+    // Perform the delete operation
+    let _ = collection.delete_one(filter, document, None).await.expect("Failed to update document from MongoDB");
+    Status::Ok
 }
 
 #[get("/note")]
@@ -117,25 +178,6 @@ async fn get_note() -> String {
     response_data.to_string()
 }
 
-#[post("/note", data = "<data>")]
-async fn post_data(data: Form<Note>) -> Status {
-    let title = &data.title;
-    let note = &data.content;
-
-    // Connect to the MongoDB database
-    let client = Client::with_uri_str(MONGODB_URI).await.expect("Failed to connect to MongoDB");
-    let db = client.database(DATABASE_NAME);
-    let collection = db.collection(COLLECTION_NAME);
-
-    // Create a new document and insert it into the MongoDB collection
-    let document = doc! {
-        "title": title,
-        "content": note,
-    };
-    let _ = collection.insert_one(document, None).await.expect("Failed to insert document into MongoDB");
-
-    Status::Ok
-}
 
 #[get("/<file_name>")]
 async fn retrieve_file(file_name: &str) -> Option<File> {
