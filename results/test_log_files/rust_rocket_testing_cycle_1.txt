@@ -1,0 +1,92 @@
+# Rust testing 1
+
+### Memory Load Testing
+
+shashankr@shashankr-Inspiron-5502:~/vs_folder/popl/POPL-Rust$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.18s
+warning: the following packages contain code that will be rejected by a future version of Rust: traitobject v0.1.0
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running `target/debug/rocket-popl`
+🔧 Configured for debug.
+   >> address: 0.0.0.0
+   >> port: 8000
+   >> workers: 8
+   >> max blocking threads: 512
+   >> ident: Rocket
+   >> IP header: X-Real-IP
+   >> limits: bytes = 8KiB, data-form = 2MiB, file = 1MiB, form = 32KiB, json = 1MiB, msgpack = 1MiB, string = 8KiB
+   >> temp dir: /tmp
+   >> http/2: true
+   >> keep-alive: 5s
+   >> tls: disabled
+   >> shutdown: ctrlc = true, force = true, signals = [SIGTERM], grace = 2s, mercy = 3s
+   >> log level: normal
+   >> cli colors: true
+📬 Routes:
+   >> (index) GET /
+   >> (get_note) GET /note
+   >> (post_data) POST /note
+   >> (welcome) GET /welcome
+   >> (retrieve_file) GET /<file_name>
+📡 Fairings:
+   >> Shield (liftoff, response, singleton)
+Launched at 0.0.0.0:5000
+
+Mon Nov 20 2023 22:14:40 GMT+0530 (India Standard Time) => /mem?title=testing {}
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+...
+time taken : 2.5541 s
+Transmission completed
+
+
+### Through-put testing
+
+shashankr@shashankr-Inspiron-5502:~/vs_folder/popl/POPL-Rust$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.18s
+warning: the following packages contain code that will be rejected by a future version of Rust: traitobject v0.1.0
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running `target/debug/rocket-popl`
+🔧 Configured for debug.
+   >> address: 0.0.0.0
+   >> port: 8000
+   >> workers: 8
+   >> max blocking threads: 512
+   >> ident: Rocket
+   >> IP header: X-Real-IP
+   >> limits: bytes = 8KiB, data-form = 2MiB, file = 1MiB, form = 32KiB, json = 1MiB, msgpack = 1MiB, string = 8KiB
+   >> temp dir: /tmp
+   >> http/2: true
+   >> keep-alive: 5s
+   >> tls: disabled
+   >> shutdown: ctrlc = true, force = true, signals = [SIGTERM], grace = 2s, mercy = 3s
+   >> log level: normal
+   >> cli colors: true
+📬 Routes:
+   >> (index) GET /
+   >> (get_note) GET /note
+   >> (post_data) POST /note
+   >> (welcome) GET /welcome
+   >> (retrieve_file) GET /<file_name>
+📡 Fairings:
+   >> Shield (liftoff, response, singleton)
+Launched at 0.0.0.0:5000
+
+Mon Nov 20 2023 18:10:15 GMT+0530 (India Standard Time) => / {}
+Mon Nov 20 2023 18:10:15 GMT+0530 (India Standard Time) => /favicon.ico {}
+Mon Nov 20 2023 18:10:16 GMT+0530 (India Standard Time) => / {}
+Mon Nov 20 2023 18:10:16 GMT+0530 (India Standard Time) => / {}
+Mon Nov 20 2023 18:10:16 GMT+0530 (India Standard Time) => / {}
+Mon Nov 20 2023 18:10:17 GMT+0530 (India Standard Time) => / {}
+Mon Nov 20 2023 18:10:17 GMT+0530 (India Standard Time) => / {}
+...
+Time taken : 296.9178 s
+Transmission completed
