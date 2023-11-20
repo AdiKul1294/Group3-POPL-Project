@@ -2,7 +2,7 @@
 
 ## Qualitative Analysis of microservices written in Rust and Javascript
 
-For understanding how same microservices behave when written in two different langauges- Rust and Javascript. For Undergraduate Students.
+For understanding how the same microservices behave when written in two different languages- Rust and Javascript. For Undergraduate Students.
 
 
 
@@ -11,7 +11,7 @@ Ensuring memory safety is a critical concern in the development of microservices
 Rust's memory architecture, characterised by ownership, borrowing, and lifetimes, 
 offers strong safety and control without a garbage collector. This minimises the risk 
 of issues like dangling pointers and segmentation faults. In contrast, languages like 
-JavaScript, commonly used in microservices, lack these safety mechanisms, 
+JavaScript, commonly used in microservices, lacks these safety mechanisms, 
 potentially leading to runtime crashes and memory-related problems. Our project 
 aims to compare the memory safety mechanisms of Rust and JavaScript in the 
 context of microservices development and hopefully show that Rust is more reliable 
@@ -125,4 +125,17 @@ These principles and features highlight Rust's focus on memory safety, ownership
 ![note_rs_memory](https://github.com/AdiKul1294/Group3-POPL-Project/assets/101890168/18e43d33-3c9e-4fb9-9d31-9920da9d994e)
 
 **Rust consumes  less percentage of memory than JavaScript because of better memory management. It happens because the heap memory gets deallocated as soon as the lifetime of the element is over or the scope of the function is over.**
+
 ## Potential for future Works.
+
+1. Multi-threading
+   We can implement multi-threading in this project to ensure a larger number of users executing parallelly. This will ensure concurrency and parallel execution for multiple users.
+2. Performance Benchmarking:
+    Conduct thorough performance benchmarks to quantify the impact of Rust's memory safety mechanisms on microservices compared to JavaScript. Evaluate factors such as 
+    execution speed, resource consumption, and scalability under varying workloads.
+
+3. Security Analysis:
+
+     Extend the study to include a comprehensive security analysis, examining potential vulnerabilities and attack vectors in microservices written in Rust and JavaScript. 
+     Explore how each language handles security-related concerns, such as buffer overflows or injection attacks.
+
