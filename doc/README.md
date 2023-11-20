@@ -21,7 +21,7 @@ when it comes to memory management.
 Within our software architecture, we have embraced a client-server paradigm, harnessing the inherent capabilities of Express.js in the realm of JavaScript. Notably, we make use of Express.js functionalities such as findOneAndUpdate for the seamless updating of notes and findOneAndDelete for the efficient removal of notes. To rigorously evaluate our system, we conduct testing in a local environment, simulating the concurrent activity of multiple users on our individual machines.
 
 Furthermore, our server is self-hosted, and its accessibility is facilitated through the utilization of a broadcast IP address. This approach provides us with a robust and controlled testing environment. The cornerstone of our data storage infrastructure is MongoDB, a choice made with a primary focus on ensuring the secure and reliable housing of all our notes. This combination of client-server architecture, Express.js features, and MongoDB database integration forms the bedrock of our software architecture, supporting the development and maintenance of a scalable and secure note-taking application.
-## POPL Aspects
+## Code Explanation
 
 In this project, we are showing performance difference between JavaScript and Rust on factors Memory utilisation, CPU Utilisation, Time taken per request, Network Traffic, and other factors which form the bedrock of any principles of programming language. Below we show some snippets of code, for both languages and show how we implemented this in both langauges.
 **JavaScript is a high level and dynamically typed language, which means that variables are determined at the runtime. We don't need to specify type explicitly.**
