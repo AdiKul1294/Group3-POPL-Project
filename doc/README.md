@@ -134,5 +134,16 @@ These principles and features highlight Rust's focus on memory safety, ownership
 
 ## Potential for future Works.
 
+1. Multi-threading
+   We can implement multi-threading in this project to ensure a larger number of users executing parallelly. This will ensure concurrency and parallel execution for multiple users.
+2. Performance Benchmarking:
+    Conduct thorough performance benchmarks to quantify the impact of Rust's memory safety mechanisms on microservices compared to JavaScript. Evaluate factors such as 
+    execution speed, resource consumption, and scalability under varying workloads.
+
+3. Security Analysis:
+
+     Extend the study to include a comprehensive security analysis, examining potential vulnerabilities and attack vectors in microservices written in Rust and JavaScript. 
+     Explore how each language handles security-related concerns, such as buffer overflows or injection attacks.
+
 
 
