@@ -127,7 +127,6 @@ router.delete("/note", (req, res) => {
 
 Now we focus on Rust. 
 
-**Rust, in comparison with JavaScript, provides high level abstarction at runtime, ensuring efficient execution of code, as most of the errors are caught at compile time.Also, memory allocation on heap is much more efficient, and uses ownership system ensuring memory safety. It uses lifetime concept, which deallocates memory as soon as function's scope is over, which helps in memory management, and we can service multiple users with faster spped**, as we show below. We show in next section how Rust is better, using graphs in next section.
 
 We first connect server with MongoDB to maintain channel of communication for note CRUD operation.
 ```
